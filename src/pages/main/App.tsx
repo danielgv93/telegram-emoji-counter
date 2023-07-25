@@ -4,7 +4,7 @@ import 'react-dropzone-uploader/dist/styles.css';
 export const App = () => {
   return (
     <div className="flex justify-center items-center w-screen h-screen">
-        TESTTT
+        TESTTTTT
       <Dropzone
         onChangeStatus={({ meta, file }, status) =>
           console.log(meta, file, status)

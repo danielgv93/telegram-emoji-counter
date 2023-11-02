@@ -1,13 +1,32 @@
 import React from 'react';
-import Dropzone, { IMeta } from 'react-dropzone-uploader';
+import Dropzone from 'react-dropzone-uploader';
 import 'react-dropzone-uploader/dist/styles.css';
+import {useChatStore} from "../../domain/store/chatStore";
+import {useNavigate} from "react-router-dom";
+import {ChatModel} from "../../domain/models/statsModel";
+
+function isChat(chat: any): chat is ChatModel {
+    return (chat as ChatModel).messages !== undefined;
+}
 export const App = () => {
+    const navigate = useNavigate();
+    const { setChat } = useChatStore();
+
+    const handleFile = ({file}: { file: File }) => {
+        file.text().then(f => {
+            const chatContent: ChatModel = JSON.parse(f);
+            if (isChat(chatContent)) {
+                setChat(chatContent);
+                navigate("/stats")
+                return;
+            }
+        })
+    }
+
   return (
     <div className="flex justify-center items-center w-screen h-screen">
       <Dropzone
-        onChangeStatus={({ meta, file }, status) =>
-          console.log(meta, file, status)
-        }
+        onChangeStatus={handleFile}
         styles={{
           dropzone: {
             overflow: 'auto',
@@ -16,23 +35,10 @@ export const App = () => {
           },
           inputLabelWithFiles: { margin: '20px 3%' },
         }}
-        accept="image/*,audio/*,video/*"
+        accept=".json"
         canRemove={true}
-        PreviewComponent={(props) => <Preview meta={props.meta} />}
       />
     </div>
   );
 };
 
-const Preview = ({ meta }: { meta: IMeta }) => {
-  const { name, percent, status, previewUrl } = meta;
-  return (
-    <div className="preview-box">
-      <img src={previewUrl} /> <span className="name">{name}</span> -{' '}
-      <span className="status">{status}</span>
-      {status !== 'done' && (
-        <span className="percent"> ({Math.round(percent)}%)</span>
-      )}
-    </div>
-  );
-};

@@ -4,9 +4,9 @@ import {Api} from "../core/constants";
 import {useChatStore} from "../store/chatStore";
 import {useNavigate} from "react-router-dom";
 
-export const useChat = (month: string): StatsModel[] | undefined => {
+export const useChat = (month: string): StatsModel | undefined => {
     const { chat } = useChatStore();
-    const [stats, setStats] = useState<StatsModel[]>();
+    const [stats, setStats] = useState<StatsModel>();
 
     useEffect(() => {
         if (!chat) {
@@ -26,7 +26,7 @@ export const useChat = (month: string): StatsModel[] | undefined => {
             })
         })
             .then((r) => r.json())
-            .then((r) => setStats(r))
+            .then((r: StatsModel) => setStats(r))
     }, [month, chat])
 
     return stats

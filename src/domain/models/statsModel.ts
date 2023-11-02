@@ -1,4 +1,8 @@
 export type StatsModel = {
+    data: DataModel[];
+    users: string[];
+};
+export type DataModel = {
     date: string;
     [key: string]: string | number;
 };

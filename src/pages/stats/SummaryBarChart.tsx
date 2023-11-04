@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Months } from '../../domain/core/constants';
-import { useChat } from '../../domain/hooks/chatHooks';
+import { Months } from 'domain/core';
+import { useChat } from 'domain/hooks/chatHooks';
 import {
 	Bar,
 	BarChart,
@@ -11,10 +10,13 @@ import {
 	XAxis,
 	YAxis,
 } from 'recharts';
-import { getBarColor } from '../../domain/utils/colors.utils';
+import { useSettingsStore } from 'domain/store/settingsStore';
+import { getBarColor } from 'domain/utils/colors.utils';
+
+const Years = ['2020', '2021', '2022'] as const;
 
 export const SummaryBarChart = () => {
-	const [month, setMonth] = useState<string>(Months[0]);
+	const { setYear, setMonth, month } = useSettingsStore();
 	const stats = useChat(month);
 	return (
 		<div>
@@ -22,6 +24,13 @@ export const SummaryBarChart = () => {
 				{Months.map((m) => (
 					<option key={m} value={m}>
 						{m}
+					</option>
+				))}
+			</select>
+			<select onChange={(e) => setYear(e.target.value)}>
+				{Years.map((y) => (
+					<option key={y} value={y}>
+						{y}
 					</option>
 				))}
 			</select>

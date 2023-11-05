@@ -22,6 +22,8 @@
 .env.test.local
 .env.production.local
 
+telegram-emoji-counter.iml
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

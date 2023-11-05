@@ -3,8 +3,10 @@ import { StatsModel } from '../models/statsModel';
 import { Api } from 'domain/core';
 import { useChatStore } from '../store/chatStore';
 import { useNavigate } from 'react-router-dom';
+import { useSettingsStore } from 'domain/store/settingsStore';
 
-export const useChat = (month: string) => {
+export const useChat = () => {
+	const { month, year } = useSettingsStore();
 	const { fileChat, setData } = useChatStore();
 
 	useEffect(() => {
@@ -26,7 +28,7 @@ export const useChat = (month: string) => {
 		})
 			.then((r) => r.json())
 			.then((r: StatsModel) => setData(r));
-	}, [month, fileChat]);
+	}, [month, year, fileChat]);
 
 	return null;
 };

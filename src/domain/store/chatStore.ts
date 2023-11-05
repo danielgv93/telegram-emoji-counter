@@ -1,13 +1,17 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-import {ChatModel} from "../models/statsModel";
+import { ChatModel, StatsModel } from '../models/statsModel';
 
 type ChatStore = {
-    chat: ChatModel | null
-    setChat: (chat: ChatModel) => void
-}
+	fileChat: ChatModel | null;
+	setFileChat: (chat: ChatModel) => void;
+	data: StatsModel | undefined;
+	setData: (data: StatsModel) => void;
+};
 
 export const useChatStore = create<ChatStore>()((set) => ({
-    chat: null,
-    setChat: (chat) => set(() => ({ chat })),
-}))
+	fileChat: null,
+	setFileChat: (chat) => set(() => ({ fileChat: chat })),
+	data: undefined,
+	setData: (data) => set(() => ({ data })),
+}));

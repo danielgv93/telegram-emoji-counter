@@ -1,5 +1,4 @@
 import { Months } from 'domain/core';
-import { useChat } from 'domain/hooks/chatHooks';
 import {
 	Bar,
 	BarChart,
@@ -12,12 +11,13 @@ import {
 } from 'recharts';
 import { useSettingsStore } from 'domain/store/settingsStore';
 import { getBarColor } from 'domain/utils/colors.utils';
+import { useChatStore } from 'domain/store/chatStore';
 
 const Years = ['2020', '2021', '2022'] as const;
 
 export const SummaryBarChart = () => {
-	const { setYear, setMonth, month } = useSettingsStore();
-	const stats = useChat(month);
+	const { setYear, setMonth } = useSettingsStore();
+	const stats = useChatStore((store) => store.data);
 	return (
 		<div>
 			<select onChange={(e) => setMonth(e.target.value)}>

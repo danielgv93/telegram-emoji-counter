@@ -1,13 +1,14 @@
-import { StatCard, StatCardI } from '../shared/StatCard';
-import { Layout } from '../shared/Layout';
+import { StatCard, StatCardI } from 'pages/shared/StatCard';
+import { Layout } from 'pages/shared/Layout';
 
 const mockStats = (title: string): StatCardI => {
 	return {
 		title,
 		rows: [
 			{ key: 'Total', value: '30' },
-			{ key: 'Media', value: '1' },
-			{ key: 'Mediana', value: '1' },
+			{ key: 'Media', value: '1.5' },
+			{ key: 'Maximo', value: '1' },
+			{ key: 'Minimo', value: '2' },
 		],
 	};
 };

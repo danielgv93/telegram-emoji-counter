@@ -1,5 +1,6 @@
 import { StatCard } from '../shared/StatCard';
 import { Layout } from '../shared/Layout';
+import { useChatStore } from 'domain/store/chatStore';
 
 const mockStats = (title: string) => {
 	return {
@@ -14,6 +15,8 @@ const mockStats = (title: string) => {
 };
 
 export const StatsByStat = () => {
+	const { data } = useChatStore();
+	console.log(data);
 	return (
 		<Layout title={'Summary of Stats'}>
 			<StatCard
@@ -25,8 +28,12 @@ export const StatsByStat = () => {
 				title={mockStats('Media').title}
 			/>
 			<StatCard
-				rows={mockStats('Mediana').rows}
-				title={mockStats('Mediana').title}
+				rows={mockStats('Máximo').rows}
+				title={mockStats('Máximo').title}
+			/>
+			<StatCard
+				rows={mockStats('Mínimo').rows}
+				title={mockStats('Mínimo').title}
 			/>
 		</Layout>
 	);

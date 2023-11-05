@@ -10,13 +10,13 @@ function isChat(chat: unknown): chat is ChatModel {
 }
 export const App = () => {
 	const navigate = useNavigate();
-	const { setChat } = useChatStore();
+	const { setFileChat } = useChatStore();
 
 	const handleFile = ({ file }: { file: File }) => {
 		file.text().then((f) => {
 			const chatContent = JSON.parse(f);
 			if (isChat(chatContent)) {
-				setChat(chatContent);
+				setFileChat(chatContent);
 				navigate('/stats');
 				return;
 			}

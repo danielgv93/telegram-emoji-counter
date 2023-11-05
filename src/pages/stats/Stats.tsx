@@ -1,11 +1,13 @@
-import { useChatRedirect } from '../../domain/hooks/chatHooks';
+import { useChat, useChatRedirect } from '../../domain/hooks/chatHooks';
 import { SummaryBarChart } from './SummaryBarChart';
 import { StatsByStat } from './StatsByStat';
 import { StatsByUser } from './StatsByUser';
+import { useSettingsStore } from 'domain/store/settingsStore';
 
 export const Stats = () => {
 	useChatRedirect();
-
+	const { month } = useSettingsStore();
+	useChat(month);
 	return (
 		<div className={'flex flex-col items-center'}>
 			<SummaryBarChart />

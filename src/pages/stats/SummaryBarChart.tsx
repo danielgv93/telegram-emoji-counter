@@ -19,7 +19,7 @@ export const SummaryBarChart = () => {
 	const { setYear, setMonth } = useSettingsStore();
 	const stats = useChatStore((store) => store.data);
 	return (
-		<div>
+		<div className={'w-full'}>
 			<select onChange={(e) => setMonth(e.target.value)}>
 				{Months.map((m) => (
 					<option key={m} value={m}>
@@ -34,25 +34,27 @@ export const SummaryBarChart = () => {
 					</option>
 				))}
 			</select>
-			<ResponsiveContainer height={300} width={800}>
-				<BarChart data={stats?.data}>
-					<CartesianGrid strokeDasharray='3 3' />
-					<XAxis dataKey='date' />
-					<YAxis />
-					<Tooltip />
-					<Legend />
-					{stats?.users.map((user, index) => (
-						<Bar
-							key={user}
-							type='monotone'
-							name={user}
-							dataKey={user}
-							stroke={getBarColor(index)}
-							fill={getBarColor(index)}
-						/>
-					))}
-				</BarChart>
-			</ResponsiveContainer>
+			<div className={'w-full flex justify-center'}>
+				<ResponsiveContainer height={300} width='90%'>
+					<BarChart data={stats?.data}>
+						<CartesianGrid strokeDasharray='3 3' />
+						<XAxis dataKey='date' />
+						<YAxis />
+						<Tooltip />
+						<Legend />
+						{stats?.users.map((user, index) => (
+							<Bar
+								key={user}
+								type='monotone'
+								name={user}
+								dataKey={user}
+								stroke={getBarColor(index)}
+								fill={getBarColor(index)}
+							/>
+						))}
+					</BarChart>
+				</ResponsiveContainer>
+			</div>
 		</div>
 	);
 };

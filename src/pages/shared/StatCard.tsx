@@ -10,8 +10,12 @@ export type UserStatI = {
 export const StatCard = (statCard: StatCardI) => {
 	return (
 		<div
-			className={'flex flex-col border rounded border-black p-4 gap-4 w-full'}>
-			<span className={'text-center text-lg'}>{statCard.title}</span>
+			className={
+				'flex flex-col border rounded-lg bg-blue-50 p-4 gap-4 w-full transition-all hover:scale-[1.02] cursor-pointer hover:shadow-lg shadow-sm'
+			}>
+			<span className={'text-center text-xl text-gray-600'}>
+				{statCard.title}
+			</span>
 			<div className={''}>
 				{statCard.rows.map((stat) => (
 					<div

@@ -18,4 +18,4 @@ jobs:
         script: |
           cd Proyectos/telegram-emoji-counter
           sudo git pull origin dev
-          ./git.sh
+          ./deploy_script.sh

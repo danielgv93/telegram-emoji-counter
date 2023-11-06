@@ -23,6 +23,7 @@ export const useChat = () => {
 				emoji: '💩',
 				options: {
 					month,
+					year,
 				},
 			}),
 		})

@@ -1,23 +1,36 @@
+import { FC } from 'react';
+import { twMerge } from 'tailwind-merge';
+
 export type StatCardI = {
-	title: string;
-	rows: UserStatI[];
-};
-export type UserStatI = {
-	key: string;
-	value: string;
+	cardTitle: string;
+	cardRows: UserStatI[];
 };
 
-export const StatCard = (statCard: StatCardI) => {
+export type UserStatI = {
+	key: string;
+	value: string | number;
+};
+
+export type StatCardProps = StatCardI & React.HTMLProps<HTMLDivElement>;
+
+export const StatCard: FC<StatCardProps> = ({
+	cardTitle,
+	cardRows,
+	...htmlProps
+}) => {
+	const { className, ...rest } = htmlProps;
 	return (
 		<div
-			className={
-				'flex flex-col border rounded-lg bg-blue-50 p-4 gap-4 w-full transition-all hover:scale-[1.02] cursor-pointer hover:shadow-lg shadow-sm'
-			}>
-			<span className={'text-center text-xl text-gray-600'}>
-				{statCard.title}
-			</span>
+			{...rest}
+			className={twMerge(
+				className,
+				'flex flex-col border rounded-lg bg-blue-50',
+				'p-4 gap-4 w-full transition-all hover:scale-[1.02]',
+				'cursor-pointer hover:shadow-lg shadow-sm'
+			)}>
+			<span className={'text-center text-xl text-gray-600'}>{cardTitle}</span>
 			<div className={''}>
-				{statCard.rows.map((stat) => (
+				{cardRows.map((stat) => (
 					<div
 						key={`stat-${stat.key}-${stat.value}`}
 						className={'flex flex-row gap-2'}>

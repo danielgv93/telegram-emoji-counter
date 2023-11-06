@@ -23,10 +23,13 @@ export const StatsByUser = () => {
 		}
 		return '';
 	}, [data]);
+	if (!data?.stats) {
+		return null;
+	}
 
 	return (
 		<Layout title={'Stats by user'}>
-			{data?.stats.map((element) => (
+			{data.stats.map((element) => (
 				<StatCard
 					className={maxUser === element.user ? '!bg-yellow-100' : ''}
 					key={`${element.user}-card`}

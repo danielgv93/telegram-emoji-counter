@@ -14,7 +14,7 @@ jobs:
       with:
         host: ${{ secrets.RASPBERRY_PI_ADDRESS }}
         username: ${{ secrets.RASPBERRY_PI_USERNAME }}
-        key: ${{ secrets.RASPBERRY_PI_SSH_KEY }}
+        password: ${{ secrets.RASPBERRY_PI_SSH_PASSWORD }}
         script: |
           cd /Proyectos/telegram-emoji-counter
           git pull origin dev

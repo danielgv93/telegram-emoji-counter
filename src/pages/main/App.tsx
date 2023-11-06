@@ -30,10 +30,24 @@ export const App = () => {
 				styles={{
 					dropzone: {
 						overflow: 'auto',
-						border: '1px solid #999',
-						background: '#f5f5f5',
+						width: '100%',
+						height: '100%',
+						background: 'transparent',
+						cursor: 'default',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
 					},
-					inputLabelWithFiles: { margin: '20px 3%' },
+					inputLabel: {
+						border: '1px dashed #ddd',
+						padding: '1rem 2rem',
+						borderRadius: '1.75rem',
+						cursor: 'pointer',
+						position: 'relative',
+					},
+					inputLabelWithFiles: {
+						margin: '20px 3%',
+					},
 				}}
 				accept='.json'
 				canRemove={true}

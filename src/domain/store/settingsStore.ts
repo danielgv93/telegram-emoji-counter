@@ -9,7 +9,7 @@ type SettingsStore = {
 
 export const useSettingsStore = create<SettingsStore>()((set) => ({
 	month: 'ALL',
-	year: '2021',
+	year: 'ALL',
 	setMonth: (month) => set({ month }),
 	setYear: (year) => set({ year }),
 }));

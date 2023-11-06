@@ -1,37 +1,36 @@
-import { StatCard, StatCardI } from 'pages/shared/StatCard';
+import { StatCard, UserStatI } from 'pages/shared/StatCard';
 import { Layout } from 'pages/shared/Layout';
+import { useChatStore } from 'domain/store/chatStore';
+import { SummaryStats } from 'domain/models/statsModel';
+import React from 'react';
 
-const mockStats = (title: string): StatCardI => {
-	return {
-		title,
-		rows: [
-			{ key: 'Total', value: '30' },
-			{ key: 'Media', value: '1.5' },
-			{ key: 'Maximo', value: '1' },
-			{ key: 'Minimo', value: '2' },
-		],
-	};
+const createRowsArray = (summaryStats: SummaryStats): UserStatI[] => {
+	return [
+		{ key: 'Total', value: summaryStats.stats.total },
+		{ key: 'Media', value: summaryStats.stats.mean },
+		{ key: 'Maximo', value: summaryStats.stats.max },
+		{ key: 'Minimo', value: summaryStats.stats.min },
+	];
 };
 
 export const StatsByUser = () => {
+	const { data } = useChatStore();
+	const maxUser = React.useMemo(() => {
+		return data?.stats.reduce((acc, curr) =>
+			curr.stats.total > acc.stats.total ? curr : acc
+		).user;
+	}, [data]);
+
 	return (
 		<Layout title={'Stats by user'}>
-			<StatCard
-				rows={mockStats('Daniel').rows}
-				title={mockStats('Daniel').title}
-			/>
-			<StatCard
-				rows={mockStats('Karla').rows}
-				title={mockStats('Karla').title}
-			/>
-			<StatCard
-				rows={mockStats('Sergio Niño Polla').rows}
-				title={mockStats('Sergio Niño Polla').title}
-			/>
-			<StatCard
-				rows={mockStats('Álvaro').rows}
-				title={mockStats('Álvaro').title}
-			/>
+			{data?.stats.map((element) => (
+				<StatCard
+					className={maxUser === element.user ? '!bg-yellow-100' : ''}
+					key={`${element.user}-card`}
+					cardRows={createRowsArray(element)}
+					cardTitle={element.user}
+				/>
+			))}
 		</Layout>
 	);
 };

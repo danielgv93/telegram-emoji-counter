@@ -13,7 +13,7 @@ import { useSettingsStore } from 'domain/store/settingsStore';
 import { getBarColor } from 'domain/utils/colors.utils';
 import { useChatStore } from 'domain/store/chatStore';
 
-const Years = ['2020', '2021', '2022'] as const;
+const Years = ['ALL', '2022', '2023'] as const;
 
 export const SummaryBarChart = () => {
 	const { setYear, setMonth } = useSettingsStore();

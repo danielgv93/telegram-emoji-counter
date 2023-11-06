@@ -1,11 +1,11 @@
-import { StatCard } from '../shared/StatCard';
+import { StatCard, StatCardI } from '../shared/StatCard';
 import { Layout } from '../shared/Layout';
 import { useChatStore } from 'domain/store/chatStore';
 
-const mockStats = (title: string) => {
+const mockStats = (title: string): StatCardI => {
 	return {
-		title,
-		rows: [
+		cardTitle: title,
+		cardRows: [
 			{ key: 'Daniel', value: '2,7' },
 			{ key: 'Karla', value: '3,7' },
 			{ key: 'Sergio Niño Polla', value: '3,5' },
@@ -20,20 +20,20 @@ export const StatsByStat = () => {
 	return (
 		<Layout title={'Summary of Stats'}>
 			<StatCard
-				rows={mockStats('Total').rows}
-				title={mockStats('Total').title}
+				cardRows={mockStats('Total').cardRows}
+				cardTitle={mockStats('Total').cardTitle}
 			/>
 			<StatCard
-				rows={mockStats('Media').rows}
-				title={mockStats('Media').title}
+				cardRows={mockStats('Media').cardRows}
+				cardTitle={mockStats('Media').cardTitle}
 			/>
 			<StatCard
-				rows={mockStats('Máximo').rows}
-				title={mockStats('Máximo').title}
+				cardRows={mockStats('Máximo').cardRows}
+				cardTitle={mockStats('Máximo').cardTitle}
 			/>
 			<StatCard
-				rows={mockStats('Mínimo').rows}
-				title={mockStats('Mínimo').title}
+				cardRows={mockStats('Mínimo').cardRows}
+				cardTitle={mockStats('Mínimo').cardTitle}
 			/>
 		</Layout>
 	);

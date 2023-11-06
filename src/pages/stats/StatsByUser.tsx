@@ -16,9 +16,12 @@ const createRowsArray = (summaryStats: SummaryStats): UserStatI[] => {
 export const StatsByUser = () => {
 	const { data } = useChatStore();
 	const maxUser = React.useMemo(() => {
-		return data?.stats.reduce((acc, curr) =>
-			curr.stats.total > acc.stats.total ? curr : acc
-		).user;
+		if (data && data.stats) {
+			return data?.stats.reduce((acc, curr) =>
+				curr.stats.total > acc.stats.total ? curr : acc
+			).user;
+		}
+		return '';
 	}, [data]);
 
 	return (

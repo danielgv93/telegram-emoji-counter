@@ -1,35 +1,35 @@
 import { StatCard, UserStatI } from 'pages/shared/StatCard';
 import { Layout } from 'pages/shared/Layout';
 import { useChatStore } from 'domain/store/chatStore';
-import { SummaryStats } from 'domain/models/statsModel';
+import { StatsByUserI } from 'domain/models/statsModel';
 import React from 'react';
+import { toFixedIfDecimal } from 'domain/utils/common.utils';
 
-const createRowsArray = (summaryStats: SummaryStats): UserStatI[] => {
+const createRowsArray = (summaryStats: StatsByUserI): UserStatI[] => {
 	return [
-		{ key: 'Total', value: summaryStats.stats.total },
-		{ key: 'Media', value: summaryStats.stats.mean },
-		{ key: 'Maximo', value: summaryStats.stats.max },
-		{ key: 'Minimo', value: summaryStats.stats.min },
+		{ key: 'Total', value: toFixedIfDecimal(summaryStats.statsByUser.total) },
+		{ key: 'Media', value: toFixedIfDecimal(summaryStats.statsByUser.mean) },
+		{ key: 'Maximo', value: toFixedIfDecimal(summaryStats.statsByUser.max) },
 	];
 };
 
 export const StatsByUser = () => {
 	const { data } = useChatStore();
 	const maxUser = React.useMemo(() => {
-		if (data && data.stats) {
-			return data?.stats.reduce((acc, curr) =>
-				curr.stats.total > acc.stats.total ? curr : acc
+		if (data && data.statsByUser) {
+			return data.statsByUser.reduce((acc, curr) =>
+				curr.statsByUser.total > acc.statsByUser.total ? curr : acc
 			).user;
 		}
 		return '';
 	}, [data]);
-	if (!data?.stats) {
+	if (!data?.statsByUser) {
 		return null;
 	}
 
 	return (
 		<Layout title={'Stats by user'}>
-			{data.stats.map((element) => (
+			{data.statsByUser.map((element) => (
 				<StatCard
 					className={maxUser === element.user ? '!bg-yellow-100' : ''}
 					key={`${element.user}-card`}

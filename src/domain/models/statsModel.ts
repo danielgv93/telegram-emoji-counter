@@ -1,17 +1,16 @@
 export type StatsModel = {
 	data: DataModel[];
 	users: string[];
-	stats: SummaryStats[];
+	statsByUser: StatsByUserI[];
+	summaryStats: SummaryStatsI[];
 };
-export type SummaryStats = {
+export type StatsByUserI = {
 	user: string;
-	stats: Stats;
+	statsByUser: Record<string, number>;
 };
-export type Stats = {
-	max: number;
-	min: number;
-	mean: number;
-	total: number;
+export type SummaryStatsI = {
+	statName: string;
+	summaryStats: Record<string, number>;
 };
 export type DataModel = {
 	date: string;

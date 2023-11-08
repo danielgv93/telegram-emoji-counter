@@ -7,9 +7,24 @@ import { toFixedIfDecimal } from 'domain/utils/common.utils';
 
 const createRowsArray = (summaryStats: StatsByUserI): UserStatI[] => {
 	return [
-		{ key: 'Total', value: toFixedIfDecimal(summaryStats.statsByUser.total) },
-		{ key: 'Media', value: toFixedIfDecimal(summaryStats.statsByUser.mean) },
-		{ key: 'Maximo', value: toFixedIfDecimal(summaryStats.statsByUser.max) },
+		{
+			key: 'Total',
+			value: summaryStats.statsByUser.Total
+				? toFixedIfDecimal(summaryStats.statsByUser.Total)
+				: '',
+		},
+		{
+			key: 'Media',
+			value: summaryStats.statsByUser.Media
+				? toFixedIfDecimal(summaryStats.statsByUser.Media)
+				: '',
+		},
+		{
+			key: 'Maximo',
+			value: summaryStats.statsByUser.Maximo
+				? toFixedIfDecimal(summaryStats.statsByUser.Maximo)
+				: '',
+		},
 	];
 };
 

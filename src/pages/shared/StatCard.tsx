@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export type StatCardI = {
@@ -25,7 +25,7 @@ export const StatCard: FC<StatCardProps> = ({
 			className={twMerge(
 				className,
 				'flex flex-col border rounded-lg bg-blue-50',
-				'p-4 gap-4 w-full transition-all hover:scale-[1.02]',
+				'p-4 gap-4 w-1/6 transition-all hover:scale-[1.02]',
 				'cursor-pointer hover:shadow-lg shadow-sm'
 			)}>
 			<span className={'text-center text-xl text-gray-600'}>{cardTitle}</span>

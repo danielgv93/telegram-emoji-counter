@@ -13,8 +13,6 @@ import { useSettingsStore } from 'domain/store/settingsStore';
 import { getBarColor } from 'domain/utils/colors.utils';
 import { useChatStore } from 'domain/store/chatStore';
 
-const Years = ['ALL', '2022', '2023'] as const;
-
 export const SummaryBarChart = () => {
 	const { setYear, setMonth } = useSettingsStore();
 	const stats = useChatStore((store) => store.data);
@@ -28,7 +26,7 @@ export const SummaryBarChart = () => {
 				))}
 			</select>
 			<select onChange={(e) => setYear(e.target.value)}>
-				{Years.map((y) => (
+				{['ALL', ...(stats?.years ?? [])].map((y) => (
 					<option key={y} value={y}>
 						{y}
 					</option>

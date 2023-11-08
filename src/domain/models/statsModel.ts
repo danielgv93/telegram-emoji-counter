@@ -1,6 +1,7 @@
 export type StatsModel = {
 	data: DataModel[];
 	users: string[];
+	years: string[];
 	statsByUser: StatsByUserI[];
 	summaryStats: SummaryStatsI[];
 };
